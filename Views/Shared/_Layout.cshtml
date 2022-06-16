@@ -1,0 +1,106 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    body {
+        background-image: url('fonas.png');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Maistanesys</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Maistanesys.styles.css" asp-append-version="true" />
+    @RenderSection("styles", false);
+
+</head>
+<body style="color:white">
+    <header style="background-color:#6f4e37;color:white !important">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Maistanesys</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        @if(Context.Session.GetString("username") != null && Context.Session.GetString("Admin") == "True")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Login" asp-action="LogOut">Atsijungti</a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Menu" asp-action="Index">Meniu</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Order" asp-action="ViewOrders">Užsakymai</a>
+                            </li>
+                        }
+                        else if (Context.Session.GetString("username") != null && Context.Session.GetString("Admin") == "False")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Login" asp-action="LogOut">Atsijungti</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Profile" asp-action="Index">Profilis</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Menu" asp-action="Index">Meniu</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Order" asp-action="Index">Krepšelis</a>
+                            </li>
+                         <li class="nav-item">
+                            <a class="nav-link "> Prisijungęs vartotojas: @Context.Session.GetString("username") </a>
+                            </li>
+                        }                
+                        else {
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Register" asp-action="Index">Registruotis</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Login" asp-action="Index">Prisijungti</a>
+                            </li>
+                        }
+
+
+             
+
+
+                </ul>
+            </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer" style="background-color:#6f4e37;color:black">
+        <div class="container">
+            &copy; 2022 - Maistanesys - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+<script type="text/javascript">
+    var user = document.querySelector('#login');
+
+    if(@Context.Session.GetString("username")==null){
+        user.style.display = 'none';
+    }
+</script>

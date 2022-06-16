@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section styles {
+<link rel="stylesheet" href="~/css/style-menu.css" asp-append-version="true" />
+}
+
+@if (Context.Session.GetString("Admin") == "True")
+{
+    <a class="button" asp-area="" asp-controller="Menu" asp-action="Create">Pridėti</a>
+}
+
+<div class="wrapper">
+
+    @foreach (var f in Model)
+    {
+        <div style="background-color: #6f4e37; padding: 10pt;border-radius: 5px 5px 5px 5px;">
+                <!-- First product box start here-->
+            <div class="box a" style="color:black">
+                    <div class="prod-info-main prod-wrap clearfix">
+                        <div class="asdfg">
+                            
+                                <div class="product-image">
+                                    <img src="cepakai.jpg" class="img-responsive" width="250" height="250">
+                                </div>
+                                <div class="product-deatil">
+                                    <h5 class="name">
+                                        <a>
+                                            @(f.Name)
+                                        </a>
+                                    </h5>
+                                    <p class="price-container">
+                                        <span>Kategorija: @(f.Category)</span>
+                                    </p>
+                                    <span class="tag1"></span>
+                                </div>
+                                <div class="description">
+                                    <p> Kaina: @(f.Price)</p>
+                                </div>
+                                <div class="product-info smart-form">
+                                    <div class="row">
+                                        @if (Context.Session.GetString("Admin") != "True")
+                                {
+                                    <div class="col-md-12">
+                                        <form asp-action="AddToOrder" method="post" role="form" style="margin-bottom:10px">
+                                            Kiekis: <input type="number" id="quantity" name="quantity" min="1" required placeholder="įveskite kiekį">
+                                            <button type="submit" name="item" value="@(f.Id)">
+                                                Pridėti į krepšelį
+                                            </button>
+                                        </form>
+
+
+                                    </div>
+                                }
+                                 @if (Context.Session.GetString("Admin") == "True")
+                                 {
+                                     <div class="col-md-12">
+                                        <form asp-action="EditForRestaurant" method="post" role="form" style="margin-bottom:10px">
+                                            <button type="submit" name="item" value="@(f.Id)">
+                                                Redaguoti
+                                            </button>
+                                        </form>
+
+
+                                    </div>
+                                 }
+                            </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end product -->
+        </div>
+    }
+</div>

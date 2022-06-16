@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Maistanesys.Models.Order>
+
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div  style="background-color: #6f4e37; padding: 10pt;border-radius: 5px 5px 5px 5px;">
+<h1 style="color:white">Užsakymai</h1>
+
+
+
+<table class="table" style="color:white">
+    <thead>
+        <tr>
+            <th>
+                Užsakymo ID
+            </th>     
+                   <th>
+                Būsena
+            </th> 
+                   <th>
+                Pristatymo adresas
+            </th> 
+                   <th>
+                Numatomas laikas
+            </th> 
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var f in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => f.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => f.State)
+                <div class="form-group">
+        <form asp-action="ChangeState">
+                <select id="state" name="state" class="form-control">
+        <option value="@((int)f.State)" selected="selected">Pasirinkite</option>            
+        <option value=1>Apmokėtas</option>
+        <option value=2>Atšauktas</option>
+        <option value=3>Gaminamas</option>
+         <option value=4>Pagamintas</option>       
+      </select>
+      <input type="hidden" id="orderId"  name="orderId" value="@(f.Id)">
+      <button>Keisti</button>
+      </form>
+            </div>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => f.DeliveryAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => f.EstimatedTime)
+            </td>               <td>
+                @Html.ActionLink("Peržiūrėti", "OrderView", new { orderId = f.Id }, new { @class = "btn btn-primary action" })
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>
+</div>

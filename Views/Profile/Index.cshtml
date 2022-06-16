@@ -1,0 +1,21 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@*<a style="color: white">Čia bus profilio langas</a>*@
+
+<div style="background-color: #6f4e37; padding: 10px">
+    <p style="color:white">Slapyvardis: @Context.Session.GetString("username")</p>
+    <p style="color:white">El. Paštas: @Context.Session.GetString("Email")</p>
+    <p style="color:white">Tel. Nr: @Context.Session.GetString("Phone")</p>
+
+
+    <a class="nav-link " asp-area="" asp-controller="Order" asp-action="UserHistory">Užsakymų istorija vartotojui</a>
+    @if (Context.Session.GetString("Admin") == "True")
+    {
+
+        <a class="nav-link " asp-area="" asp-controller="Order" asp-action="History">Užsakymo istorija restoranui</a>
+    }
+</div>

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Maistanesys.Models.Item>
+
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div  style="background-color: #6f4e37; padding: 10pt;border-radius: 5px 5px 5px 5px;">
+<h1 style="color:white">Krepšelis</h1>
+
+
+
+<table class="table" style="color:white">
+    <thead>
+        <tr>
+            <th>
+                Pavadinimas
+            </th>        
+                   <th>
+                Kaina
+            </th> 
+                   <th>
+                Kategorija
+            </th> 
+                   <th>
+                Kiekis
+            </th> 
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var f in Model) {
+        <tr>
+             <td>
+                @Html.DisplayFor(modelItem => f.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => f.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => f.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => f.Amount)
+            </td>               <td>
+                @Html.ActionLink("Edit", "Edit", new { id = f.Id }, new { @class = "btn btn-primary action" })
+                @Html.ActionLink("Delete", "Delete", new { id = f.Id }, new { @class = "btn btn-danger action" })
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>
+</div>

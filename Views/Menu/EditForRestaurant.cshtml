@@ -1,0 +1,56 @@
+﻿@model Maistanesys.Models.Item
+
+@{
+    ViewData["Title"] = "EditForRestaurant";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 style="color:black;">Redaguoti</h1>
+
+<h4 style="color:black;">Patiekalo informacija</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditRestaurant">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <h1 style="color:black; font-size:120%;">Pavadinimas</h1>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <h1 style="color:black; font-size:120%;">Kaina</h1>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <h1 style="color:black; font-size:120%;">Kategorija</h1>
+                <select asp-for="Category" class="form-control">
+                    <option value=0>Asian</option>
+        <option value=1>Dessert</option>
+        <option value=2>Drinks</option>
+         <option value=3>Fast food</option>
+        <option value=4>Sea food</option>
+        <option value=5>Other</option>
+         <option value=6>Meat dishes</option>
+        <option value=7>Sauces</option>
+        <option value=8>Pizza</option>
+         <option value=9>Salad</option>
+        <option value=10>Soup</option>
+        <option value=11>Sushi</option>
+        <option value=12>Vegetarian</option>
+
+                </select>
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+                       <div class="form-group">
+                <input type="submit" style="color:black;" value="Redaguoti" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Atgal į sąrašą</a>
+</div>
+

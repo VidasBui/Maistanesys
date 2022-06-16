@@ -1,0 +1,51 @@
+@model IEnumerable<Maistanesys.Models.Order>
+
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div  style="background-color: #6f4e37; padding: 10pt;border-radius: 5px 5px 5px 5px;">
+<h1 style="color:white">Užsakymų istorija</h1>
+
+
+
+<table class="table" style="color:white">
+    <thead>
+        <tr>
+            <th>
+                Užsakymo ID
+            </th>     
+                   <th>
+                Būsena
+            </th> 
+                   <th>
+                Pristatymo adresas
+            </th> 
+                   <th>
+                Numatomas laikas
+            </th> 
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var f in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => f.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => f.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => f.DeliveryAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => f.EstimatedTime)
+            </td>               <td>
+                @Html.ActionLink("Peržiūrėti", "OrderView", new { orderId = f.Id }, new { @class = "btn btn-primary action" })
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>
+</div>
